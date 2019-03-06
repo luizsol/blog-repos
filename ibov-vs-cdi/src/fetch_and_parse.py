@@ -4,6 +4,8 @@ import requests
 from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup
+import pandas as pd
+
 
 BCB_CDI_URL = 'https://www3.bcb.gov.br/CALCIDADAO/publico/' \
               'corrigirPeloCDI.do?method=corrigirPeloCDI'
@@ -12,7 +14,7 @@ BCB_FIRST_CDI_DATE = datetime.date(1986, 3, 6)
 headers = {'content-type': 'application/x-www-form-urlencoded'}
 
 
-def fetch_cdi_for_date_interval(start_date=None, end_date=None):
+def fetch_cdi_for_date_interval(start_date=None, end_date=None) -> Decimal:
     if start_date is None:
         start_date = BCB_FIRST_CDI_DATE
 
@@ -46,7 +48,7 @@ def fetch_cdi_for_date_interval(start_date=None, end_date=None):
         raise RuntimeError('Unable to retrieve CDI value.')
 
 
-def fetch_daily_cdi_for_date_range(start_date=None, end_date=None):
+def fetch_daily_cdi_for_date_range(start_date=None, end_date=None) -> list:
     if start_date is None:
         start_date = BCB_FIRST_CDI_DATE
 
@@ -70,3 +72,42 @@ def fetch_daily_cdi_for_date_range(start_date=None, end_date=None):
             current_date += datetime.timedelta(days=1)
 
     return [{'date': key, 'cdi': value} for key, value in res.items()]
+
+
+def save_cdi_to_csv(data: list, path='data/cdi-data.csv') -> None:
+    pd.DataFrame(data).to_csv(path)
+
+
+def load_ibov_data(path='data/ibov-data.csv') -> pd.DataFrame:
+    return pd.read_csv(
+        path, decimal=',', parse_dates=True, index_col=0, dayfirst=True)
+
+
+def load_cdi_data(path='data/cdi-data.csv') -> pd.DataFrame:
+    return pd.read_csv(path, parse_dates=True, index_col=0)
+
+
+def merge_and_fill_ibov_and_cdi(
+        ibov: pd.DataFrame, cdi: pd.DataFrame) -> pd.DataFrame:
+
+    merged = ibov.join(cdi).sort_index()
+
+    merged[['cdi']] = merged[['cdi']].fillna(value=1)
+    merged = merged.fillna(method='ffill')
+
+    merged[['ibov_adj', 'ibov']] = \
+        merged[['ibov_adj', 'ibov']] / merged[['ibov_adj', 'ibov']].shift()
+
+    merged = merged[merged.index > datetime.datetime(1994, 12, 31)]
+
+    return merged[['ibov_adj', 'cdi']]
+
+
+def load_and_merge_data(
+        ibov_path='data/ibov-data.csv',
+        cdi_path='data/cdi-data.csv') -> pd.DataFrame:
+
+    return merge_and_fill_ibov_and_cdi(
+        load_ibov_data(path=ibov_path),
+        load_cdi_data(path=cdi_path))
+
