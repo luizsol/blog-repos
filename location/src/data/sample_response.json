@@ -1,0 +1,126 @@
+{
+    "destination_addresses": [
+        "Av. Miguel Frias e Vasconcelos, 756 - Jaguare, São Paulo - SP, Brasil",
+        "Rua Quirino Pucca, 166 - Vila Romana, São Paulo - SP, 05048-060, Brasil",
+        "Rua Sílvio Penteado, 6 - Brás, São Paulo - SP, 03010-070, Brasil"
+    ],
+    "origin_addresses": [
+        "Av. Miguel Frias e Vasconcelos, 756 - Jaguare, São Paulo - SP, Brasil",
+        "Rua Quirino Pucca, 166 - Vila Romana, São Paulo - SP, 05048-060, Brasil",
+        "Rua Sílvio Penteado, 6 - Brás, São Paulo - SP, 03010-070, Brasil"
+    ],
+    "rows": [
+        {
+            "elements": [
+                {
+                    "distance": {
+                        "text": "1 m",
+                        "value": 0
+                    },
+                    "duration": {
+                        "text": "1 min",
+                        "value": 0
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "8,2 km",
+                        "value": 8160
+                    },
+                    "duration": {
+                        "text": "18 minutos",
+                        "value": 1085
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "22,3 km",
+                        "value": 22261
+                    },
+                    "duration": {
+                        "text": "33 minutos",
+                        "value": 1979
+                    },
+                    "status": "OK"
+                }
+            ]
+        },
+        {
+            "elements": [
+                {
+                    "distance": {
+                        "text": "7,7 km",
+                        "value": 7673
+                    },
+                    "duration": {
+                        "text": "20 minutos",
+                        "value": 1217
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "1 m",
+                        "value": 0
+                    },
+                    "duration": {
+                        "text": "1 min",
+                        "value": 0
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "13,1 km",
+                        "value": 13096
+                    },
+                    "duration": {
+                        "text": "31 minutos",
+                        "value": 1869
+                    },
+                    "status": "OK"
+                }
+            ]
+        },
+        {
+            "elements": [
+                {
+                    "distance": {
+                        "text": "19,6 km",
+                        "value": 19614
+                    },
+                    "duration": {
+                        "text": "33 minutos",
+                        "value": 2009
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "12,5 km",
+                        "value": 12453
+                    },
+                    "duration": {
+                        "text": "31 minutos",
+                        "value": 1856
+                    },
+                    "status": "OK"
+                },
+                {
+                    "distance": {
+                        "text": "1 m",
+                        "value": 0
+                    },
+                    "duration": {
+                        "text": "1 min",
+                        "value": 0
+                    },
+                    "status": "OK"
+                }
+            ]
+        }
+    ],
+    "status": "OK"
+}

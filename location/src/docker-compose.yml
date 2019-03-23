@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis-db:
+    image: redis:5
+    ports:
+      - 6379:6379   # db access
+    volumes:
+      - ./data:/data
+
+  # python:
+  #   build: .
+  #   image: python-scrapper
+  #   environment:
+  #     API_KEY: ${API_KEY}
+  #     REDIS_HOST: 'redis-db'
+  #   depends_on:
+  #     - db
